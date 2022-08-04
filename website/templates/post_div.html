@@ -43,6 +43,21 @@
                     <div class="card-text">
                         {{post.text}}
                     </div>
+
+                    <!-- Comments -->
+                    <br />
+                    {% for comment in post.comments %}
+                        {{comment.text}}
+                    {% endfor %}
+
+                    <br />
+
+                    <form class="input-group mb-3" method='POST' action="/create-comment/{{post.id}}">
+                        <input type="text" id="text" name="text" class="form-control" placeholder="Comment something!" />
+                        <button type="submit" class="btn btn-primary">
+                            Comment
+                        </button>
+                    </form>
                 </div>
 
                 <!-- Post date-->
