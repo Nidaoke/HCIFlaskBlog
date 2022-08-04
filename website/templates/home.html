@@ -1,4 +1,11 @@
 <!--uses the base template-->
 {%extends "base.html"%}
 {% block title %}Home{% endblock %}
-{% block content %}<h1>Hello this is a test</h1>{% endblock %}
+{% block content %}
+<h1>Home Screen</h1>
+<!-- Display posts -->
+{% for post in posts %}
+    {{ post.text }}
+    {{ post.user.username}} <!-- user.username over author, since author is the id -->
+{% endfor %}
+{% endblock %}
