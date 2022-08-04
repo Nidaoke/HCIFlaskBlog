@@ -31,3 +31,18 @@ def create_post():
             flash('Post created!', category='success')
             return redirect(url_for('views.home')) # Go back to home
     return render_template('createpost.html', user=current_user) # Go to create post page, pass user
+
+@views.route("/delete-post/<id>")
+@login_required
+def delete_post(id):
+    post = Post.query.filter_by(id=id).first() # Get post by post id
+
+    if not post:
+        flash("Post does not exist", category='error')
+    elif current_user.id!=post.author:
+        flash('You do not have permission to delete this post', category='error')
+    else:
+        db.session.delete(post)
+        db.session.commit()
+        flash('Post deleted', category='success')
+    return redirect(url_for('views.home'))
