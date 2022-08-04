@@ -23,8 +23,18 @@
                         {{post.user.username}}
                     </a>
 
-                    {% if user.id == post.author %} <!-- Only view options if author -->
-                    <!-- Post buttons -->
+                
+                <div>
+                    {{post.likes|length}}
+                    {% if user.id in post.likes|map(attribute="author")|list %}
+                    <a href="/like-post/{{post.id}}"><i class="fas fa-thumbs-up"></i></a>
+                    {% else %}
+                    <a href="/like-post/{{post.id}}"><i class="far fa-thumbs-up"></i></a>
+                    {% endif %}
+                    
+               {% if user.id == post.author %} <!-- Only view options if author -->
+                <!-- Post buttons -->
+                    
                     <div class="btn-group">
                         <!-- Dropdown button -->
                         <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown"></button>
@@ -34,7 +44,9 @@
                             <li> <a href="/delete-post/{{post.id}}" class="dropdown-item"> Delete </a> </li>
                         </ul>
                     </div>
-                    {% endif %}
+                {% endif %}
+                </div>
+                    
 
                 </div>
 

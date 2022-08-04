@@ -29,7 +29,7 @@ def create_app():
     # "/" is the address of the website that is being visited
     # inside the function is the logic of the webpage 
     # return is what is displayed
-    from .models import User, Post, Comment
+    from .models import User, Post, Comment, Like
     create_database(app)
     #---------------------------------
     login_manager = LoginManager()
