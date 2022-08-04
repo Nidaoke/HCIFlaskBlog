@@ -46,7 +46,7 @@
                     <br />
 
                     <!-- See Comments -->
-                    <div class="" id="comments-{{post.id}}">
+                    <div class="collapse" id="comments-{{post.id}}">
                         <div class="card">
                             <div class="card-body" id="comments-expanded-{{post.id}}">
                                 {% for comment in post.comments %}
@@ -57,15 +57,44 @@
                                         </div>
 
                                         <div>
+                                            <!-- Date -->
                                             <small class="text-muted">
                                                 {{comment.date_created}}
                                             </small>
+
+                                            <!-- Delete -->
+                                            {% if user.id == comment.author or user.id == post.author %}
+                                                <div class="btn-group">
+                                                    <!-- Dropdown button -->
+                                                    <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown"></button>
+                                                    <!-- Dropdown items -->
+                                                    <ul class="dropdown-menu">
+                                                        <!-- Delete item -->
+                                                        <li> <a href="/delete-post/{{post.id}}" class="dropdown-item"> Delete </a> </li>
+                                                    </ul>
+                                                </div>
+                                            {% endif %}
                                         </div>
                                     </div>
 
                                 {% endfor %}
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Collapse/Expand comments -->
+                    <div class="card-text>"
+                        {% if post.comments|length > 0 %}
+                            <a data-bs-toggle="collapse" href="#comments-{{post.id}}" role="button">
+                                <small>
+                                    View {{post.comments|length}} Comments
+                                </small>
+                            </a>
+                        {% else %}
+                            <small class="text-muted">
+                                No comments yet!
+                            </small>
+                        {% endif %}
                     </div>
                     <br />
 
