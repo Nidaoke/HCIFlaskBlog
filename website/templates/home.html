@@ -19,6 +19,7 @@
                 {{post.user.username}}
             </a>
 
+            {% if user.id == post.author %} <!-- Only view options if author -->
             <!-- Post buttons -->
             <div class="btn-group">
                 <!-- Dropdown button -->
@@ -29,6 +30,8 @@
                     <li> <a href="/delete-post/{{post.id}}" class="dropdown-item"> Delete </a> </li>
                 </ul>
             </div>
+            {% endif %}
+
         </div>
 
         <!-- Post text -->
